@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360699331576",
+    "project_id": "codemtask",
+    "storage_bucket": "codemtask.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360699331576:android:7c692f7eced20e21f38c0d",
+        "android_client_info": {
+          "package_name": "com.app.codemtask"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe1s70Se6q6iZmBNSbvUauKw9XLnSM2RM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
