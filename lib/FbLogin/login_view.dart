@@ -1,6 +1,7 @@
 import 'package:codemtask/FbSignup/signup_view.dart';
 import 'package:codemtask/HomeScreen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Providers/fb_auth_method_providers.dart';
 import '../Providers/google_signing_providers.dart';
@@ -169,7 +170,7 @@ class _LoginViewState extends State<LoginView> {
                       height: 10,
                     ),
                     Row(
-                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Card(
                             color: Colors.teal,
@@ -202,7 +203,7 @@ class _LoginViewState extends State<LoginView> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                           color: Colors.teal,
+                          color: Colors.teal,
                           borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         children: [
@@ -216,7 +217,7 @@ class _LoginViewState extends State<LoginView> {
                           const SizedBox(
                             width: 10,
                           ),
-                           Center(
+                          Center(
                               child: GestureDetector(
                                   onTap: () async {
                                     google(context);
@@ -227,9 +228,9 @@ class _LoginViewState extends State<LoginView> {
                                   child:const Text(
                                     "Signing with Google",
                                     style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.white
                                     ),
                                   )
                               )),
@@ -244,7 +245,7 @@ class _LoginViewState extends State<LoginView> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                           color: Colors.teal,
+                          color: Colors.teal,
                           borderRadius: BorderRadius.circular(8)),
                       child: Row(
                         children: [
@@ -258,7 +259,7 @@ class _LoginViewState extends State<LoginView> {
                           Center(
                               child: GestureDetector(
                                   onTap: () async {
-                                    // google(context);
+                                    _loginWithFacebook();
                                     // setState(() {
                                     //   loading =true;
                                     // });
@@ -295,7 +296,7 @@ class _LoginViewState extends State<LoginView> {
           setState(() {
             isLoading = false;
           });
-           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
         }else{
           Fluttertoast.showToast(msg: "Login Field");
           print('login Field');
@@ -307,6 +308,22 @@ class _LoginViewState extends State<LoginView> {
     }else{
       Fluttertoast.showToast(msg: "Please fill form correctly");
       print("Please fill form correctly");
+    }
+  }
+  Future<void> _loginWithFacebook() async {
+    final result = await FacebookAuth.instance.login();
+
+    switch (result.status) {
+      case LoginStatus.success:
+        final accessToken = result.accessToken;
+        print(accessToken);
+        break;
+      case LoginStatus.cancelled:
+        break;
+      case LoginStatus.failed:
+        break;
+      default:
+        break;
     }
   }
 }
